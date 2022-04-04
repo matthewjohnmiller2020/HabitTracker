@@ -1,12 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
+  const navigate = useNavigate();
   const submitLogin = (e) => {
     e.preventDefault();
   }
   const signUp = () => {
-    console.log('Sign up clicked')
+    navigate('/signup')
   }
 return (
   <div className='loginContainer'>
