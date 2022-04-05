@@ -11,11 +11,11 @@ const Signup = () => {
         username: username,
         password: password
       }
-      console.log(JSON.stringify(newUser))
+      console.log(newUser)
       fetch('/user/signup', {
         method: "POST",
-        body: JSON.stringify(newUser),
-        headers: {"Content-Type": "application/json; charset=UTF-8"}
+        headers: {"Content-Type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(newUser)
       })
       .then(response => response.json())
       .then(json => console.log(json))
