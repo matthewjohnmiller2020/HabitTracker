@@ -1,14 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
   const submitLogin = (e) => {
     e.preventDefault();
   }
-  const signUp = () => {
-    navigate('/signup')
-  }
+
 return (
   <div className='loginContainer'>
     <h1>Welcome to Habit Tracker</h1>
@@ -20,7 +18,10 @@ return (
         <input type='password' placeholder='Password'></input>
         <button type='submit'>Login</button>
       </form>
-      <p>Not a user? Sign up here: </p><button onClick={signUp}>Sign Up</button>
+      <p>Not a user? Sign up here:</p>
+      <Link to='/signup'>
+        <button>Sign Up</button>
+      </Link>
     </div>
   </div>
 )

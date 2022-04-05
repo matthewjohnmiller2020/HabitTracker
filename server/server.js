@@ -8,20 +8,12 @@ const userRouter = require('./routes/userRouter.js')
 
 app.use(express.json());
 app.search(express.urlencoded({extended: true}));
-app.use(express.static(DIST_DIR));
 
-const DIST_DIR = path.resolve(__dirname, '../dist');
-const HTML_FILE = path.resolve(DIST_DIR, 'index.html'); 
-
+//serve index
+// app.use(express.static(path.resolve(__dirname, '../dist')));
 
 
 app.use('/user', userRouter);
-
-app.get('/', (req, res) => {
-  res.sendFile(HTML_FILE);
-});
-
-
 
 app.use((err, req, res, next) => {
   const defaultErr = {

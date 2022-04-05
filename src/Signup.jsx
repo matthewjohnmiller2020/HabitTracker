@@ -1,7 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const submitSignup = (e) => {
     e.preventDefault();
@@ -11,19 +11,16 @@ const Login = () => {
         username: username,
         password: password
       }
-      console.log(JSON.stringify(newUser));
+      console.log(JSON.stringify(newUser))
       fetch('/user/signup', {
         method: "POST",
         body: JSON.stringify(newUser),
         headers: {"Content-Type": "application/json; charset=UTF-8"}
       })
-      .then(response => response.text())
+      .then(response => response.json())
       .then(json => console.log(json))
       .catch(err => console.log(err));
     
-  }
-  const goBack = () => {
-    navigate('/')
   }
 return (
   <div className='loginContainer'>
@@ -36,10 +33,12 @@ return (
         <input type='password' id="passwordSelect" placeholder='Password'></input>
         <button type='submit'>Create Account</button>
       </form>
-      <button onClick={goBack}>Go back</button>
+      <Link to='/'>
+        <button>Go back</button>
+        </Link>
     </div>
   </div>
 )
 }
 
-export default Login;
+export default Signup;
