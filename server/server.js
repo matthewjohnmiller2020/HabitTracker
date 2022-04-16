@@ -4,16 +4,16 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-const userRouter = require('./routes/userRouter.js')
+const userRouter = require('./routes/userRouter.js');
+const habitRouter = require('./routes/habitRouter.js');
 
 app.use(express.json());
-app.search(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true}));
 
-//serve index
-// app.use(express.static(path.resolve(__dirname, '../dist')));
-
-
+// serve index
+app.use(express.static(path.resolve(__dirname, '../dist')));
 app.use('/user', userRouter);
+app.use('/habits', habitRouter);
 
 app.use((err, req, res, next) => {
   const defaultErr = {

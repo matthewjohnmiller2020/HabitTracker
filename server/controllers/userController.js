@@ -38,4 +38,27 @@ userController.signup = async (req, res, next) => {
   next();
 }
 
+userController.login = async(req, res, next) => {
+  const{username, password} = req.body;
+  //Ensure that user and password field are both not blank
+  if(!username || !password) {
+    res.locals.message = 'One or more of the fields was blank. Please try again.'
+    return res.status(400).json({username: '', password: '', message: res.locals.message})
+  }
+
+  const queryString = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
+
+  const foundUser = await db.query(queryString);
+
+  //If no results are returned, throw incorrect entry error
+  if (!foundUser.rows.length) {
+    res.locals.errorMessage = 'Your username or password was entered incorrectly. Please try again.';
+    return res.status(400).json({username: '', password: '', errorMessage: res.locals.errorMessage})
+  }
+
+  res.locals.username = username;
+  res.locals.password = password;
+  next();
+}
+
 module.exports = userController;

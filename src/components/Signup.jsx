@@ -5,22 +5,22 @@ const Signup = () => {
   const navigate = useNavigate();
   const submitSignup = (e) => {
     e.preventDefault();
-      const username = document.getElementById('userSelect').value;
-      const password = document.getElementById('passwordSelect').value;
-      const newUser = {
-        username: username,
-        password: password
-      }
-      console.log(newUser)
-      fetch('/user/signup', {
-        method: "POST",
-        headers: {"Content-Type": "application/json; charset=UTF-8"},
-        body: JSON.stringify(newUser)
-      })
-      .then(response => response.json())
-      .then(json => console.log(json))
-      .catch(err => console.log(err));
+    const username = document.getElementById('userSelect').value;
+    const password = document.getElementById('passwordSelect').value;
+    const newUser = {
+      username: username,
+      password: password
+    }
+    fetch('/user/signup', {
+      method: "POST",
+      headers: {"Content-Type": "application/json; charset=UTF-8"},
+      body: JSON.stringify(newUser)
+    })
+    .then(response => response.json())
+    .then(json => console.log(json))
+    .catch(err => console.log(err));
     
+    navigate('/dashboard');
   }
 return (
   <div className='loginContainer'>
