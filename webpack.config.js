@@ -17,6 +17,7 @@ module.exports = {
     proxy: {
       '/api': 'http:localhost:3000',
       "/user": "http://localhost:3000",
+      "/habits": "http://localhost:3000",
     },
   },
   plugins: [htmlPlugin],

@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/getHabits', habitController.getHabits, (req, res) => {
   return res
   .set('Content-Type', 'application/json')
-  .status(200).json({username : res.locals.username, habits: res.locals.habits})
+  .status(200).json({habits: res.locals.habits})
 });
 
 module.exports = router;

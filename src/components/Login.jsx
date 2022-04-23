@@ -17,7 +17,6 @@ const Login = () => {
       body: JSON.stringify(userData)
     })
     .then(response => response.text())
-    .then(json => console.log(json))
     .catch(err => console.log(err));
   
     navigate('/dashboard');

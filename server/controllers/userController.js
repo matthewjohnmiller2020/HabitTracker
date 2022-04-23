@@ -1,4 +1,6 @@
 const db = require('../dataModel.js');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const userController = {};
 
 userController.signup = async (req, res, next) => {
@@ -22,20 +24,31 @@ userController.signup = async (req, res, next) => {
     res.locals.message = 'An account with this username already exists. Please try again.'
     return res.status(400).json({username: '', password: '', message: res.locals.message})
   }
-
-  const querySuccessString =  `
+  try{ 
+  const hashPassword = bcrypt.hashSync(password, 10); 
+  const querySuccessString =  ` 
   INSERT INTO users (username, password)
   VALUES ($1, $2)
   RETURNING username, password`;
 
-  const values = [username, password];
+  const values = [username, hashPassword];
 
   const userCreated = await db.query(querySuccessString, values);
 
   res.locals.username = userCreated.rows[0].username;
-  res.locals.password = userCreated.rows[0].password;
 
+  const token = jwt.sign({user : userCreated[0].username}, "mmmsecret", {maxAge: 600000});
+
+  res.cookie('token', token, {
+    httpOnly: true
+  })
   next();
+  } catch(err) {
+    console.log(err);
+    next({
+      message: err
+    })
+  }
 }
 
 userController.login = async(req, res, next) => {
@@ -45,20 +58,36 @@ userController.login = async(req, res, next) => {
     res.locals.message = 'One or more of the fields was blank. Please try again.'
     return res.status(400).json({username: '', password: '', message: res.locals.message})
   }
+  try{
+    const queryString = `SELECT * FROM users WHERE username = '${username}'`
 
-  const queryString = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
+    const foundUser = await db.query(queryString);
+  
+    //If no results are returned, throw incorrect entry error
+    if (!foundUser.rows.length) {
+      res.locals.errorMessage = 'Your username or password was entered incorrectly. Please try again.';
+      return res.status(400).json({username: '', password: '', errorMessage: res.locals.errorMessage})
+    }
+    
+    const compare = bcrypt.compare(password, foundUser.rows[0].password)
+    if(!compare){
+      res.locals.errorMessage = 'Your username or password was entered incorrectly. Please try again.';
+      return res.status(400).json({username: '', password: '', errorMessage: res.locals.errorMessage})
+    }
+    const token = jwt.sign({user : userCreated[0].username}, "mmmsecret", {maxAge: 600000});
 
-  const foundUser = await db.query(queryString);
-
-  //If no results are returned, throw incorrect entry error
-  if (!foundUser.rows.length) {
-    res.locals.errorMessage = 'Your username or password was entered incorrectly. Please try again.';
-    return res.status(400).json({username: '', password: '', errorMessage: res.locals.errorMessage})
+    res.cookie('token', token, {
+      httpOnly: true
+    })
+    res.locals.username = username;
+    next();
   }
-
-  res.locals.username = username;
-  res.locals.password = password;
-  next();
+  catch(err) {
+    console.log(err);
+    next({
+      log: err
+    })
+  }
 }
 
 module.exports = userController;

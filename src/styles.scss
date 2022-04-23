@@ -1,13 +1,22 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #45523E;
-  color: rgb(72, 206, 183);
+  background: url("https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+
+  color: white;
+  text-shadow: -1px 1px 0 #000,
+                          1px 1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px -1px 0 #000;
+  
 }
 .loginContainer {
   align-content: center;
   margin-left: 25%;
   margin-right: 25%;
-  border: 5px solid #a48ba8;
+  border: 5px solid #bea3c2;
   border-radius: 5px;
   padding: 1em;
   text-align: center;
@@ -31,10 +40,21 @@ body {
     margin-bottom: 1em;
     text-align: center;
     width: 20%;
-    background-color: green;
+    background-color: transparent;
     color: antiquewhite;
     font-style: arial;
     border-width: 5px;
     border-color: #a48ba8;
+    text-shadow: -1px 1px 0 #000,
+                          1px 1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px -1px 0 #000;
+  
   }
+}
+.habitCard {
+  background-color: transparent;
+  border: 1px solid white;
+  color: antiquewhite;
+  margin: 10px;
 }
