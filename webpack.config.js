@@ -9,6 +9,7 @@ module.exports = {
   mode: 'development',
   entry: "./src/index.js",
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: path.join(__dirname, "src"),
       publicPath: 'main.js',

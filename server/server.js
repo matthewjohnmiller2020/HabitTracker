@@ -15,6 +15,14 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 app.use('/user', userRouter);
 app.use('/habits', habitRouter);
 
+app.get('/*', function(req, res) {
+  res.sendFile(path.resolve(__dirname, '../src/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',

@@ -37,7 +37,7 @@ userController.signup = async (req, res, next) => {
 
   res.locals.username = userCreated.rows[0].username;
 
-  const token = jwt.sign({user : userCreated[0].username}, "mmmsecret", {maxAge: 600000});
+  const token = jwt.sign({user : userCreated[0].username}, "mmmsecret", {expiresIn: 15});
 
   res.cookie('token', token, {
     httpOnly: true
@@ -74,7 +74,7 @@ userController.login = async(req, res, next) => {
       res.locals.errorMessage = 'Your username or password was entered incorrectly. Please try again.';
       return res.status(400).json({username: '', password: '', errorMessage: res.locals.errorMessage})
     }
-    const token = jwt.sign({user : userCreated[0].username}, "mmmsecret", {maxAge: 600000});
+    const token = jwt.sign({user : foundUser.rows[0].username}, "mmmsecret", {expiresIn: '15s'});
 
     res.cookie('token', token, {
       httpOnly: true
