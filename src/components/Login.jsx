@@ -16,10 +16,14 @@ const Login = () => {
       headers: {"Content-Type": "application/json; charset=UTF-8"},
       body: JSON.stringify(userData)
     })
-    .then(response => response.text())
+    .then((response) =>{
+      if(!response.ok) console.log("An error occurred")
+     else{
+      response.text()
+      navigate('/dashboard');
+    }
+    })
     .catch(err => console.log(err));
-  
-    navigate('/dashboard');
   }
 
 return (

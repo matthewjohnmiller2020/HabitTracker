@@ -16,11 +16,14 @@ const Signup = () => {
       headers: {"Content-Type": "application/json; charset=UTF-8"},
       body: JSON.stringify(newUser)
     })
-    .then(response => response.json())
-    .then(json => console.log(json))
+    .then((response) =>{
+      if(!response.ok) console.log("An error occurred")
+     else{
+      response.text()
+      navigate('/dashboard');
+    }
+    })
     .catch(err => console.log(err));
-    
-    navigate('/dashboard');
   }
 return (
   <div className='loginContainer'>
