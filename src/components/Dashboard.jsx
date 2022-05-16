@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import { useEffect } from 'react/cjs/react.production.min';
+import React, {useState, useEffect} from 'react';
 import Habit from './Habit.jsx';
 
 const Dashboard = () => {
@@ -13,7 +12,7 @@ const Dashboard = () => {
       })
       .then((data) => data.json())
       .then((data) => {
-        const habitCards = [];
+        let habitCards = [];
         for(let habit of data.habits){
           habitCards.push(
             <Habit 

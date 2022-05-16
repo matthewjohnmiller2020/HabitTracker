@@ -74,7 +74,7 @@ userController.login = async(req, res, next) => {
       res.locals.errorMessage = 'Your username or password was entered incorrectly. Please try again.';
       return res.status(400).json({username: '', password: '', errorMessage: res.locals.errorMessage})
     }
-    const token = jwt.sign({user : foundUser.rows[0].username}, "mmmsecret", {expiresIn: '15s'});
+    const token = jwt.sign({user : foundUser.rows[0].username}, "mmmsecret", {expiresIn: 15000});
 
     res.cookie('token', token, {
       httpOnly: true

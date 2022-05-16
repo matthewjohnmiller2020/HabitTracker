@@ -2,7 +2,6 @@ const db = require('../dataModel.js');
 const habitController = {};
 
 habitController.getHabits = async(req, res, next) => {
-  console.log('Hello from habit controller');
   const {username} = req.body;
   //replace username with userid
 
