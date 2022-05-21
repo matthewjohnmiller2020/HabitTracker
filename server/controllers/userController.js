@@ -9,7 +9,7 @@ userController.signup = async (req, res, next) => {
   //Ensure that user and password field are both not blank
   if(!username || !password) {
     res.locals.message = 'One or more of the fields was blank. Please try again.'
-    return res.status(400).json({username: '', password: '', message: res.locals.message})
+    return res.status(400).json({ message: res.locals.message})
   }
 
   //Check to see if a user with the requested name already exists
@@ -22,7 +22,7 @@ userController.signup = async (req, res, next) => {
   //If user already exists, throw error
   if(foundUser.rows.length) {
     res.locals.message = 'An account with this username already exists. Please try again.'
-    return res.status(400).json({username: '', password: '', message: res.locals.message})
+    return res.status(400).json({message: res.locals.message})
   }
   try{ 
   const hashPassword = bcrypt.hashSync(password, 10); 
@@ -34,10 +34,9 @@ userController.signup = async (req, res, next) => {
   const values = [username, hashPassword];
 
   const userCreated = await db.query(querySuccessString, values);
-
   res.locals.username = userCreated.rows[0].username;
 
-  const token = jwt.sign({user : userCreated[0].username}, "mmmsecret", {expiresIn: 15});
+  const token = jwt.sign({user : res.locals.username}, "mmmsecret", {expiresIn: 15});
 
   res.cookie('token', token, {
     httpOnly: true
@@ -56,7 +55,7 @@ userController.login = async(req, res, next) => {
   //Ensure that user and password field are both not blank
   if(!username || !password) {
     res.locals.message = 'One or more of the fields was blank. Please try again.'
-    return res.status(400).json({username: '', password: '', message: res.locals.message})
+    return res.status(400).json({message: res.locals.message})
   }
   try{
     const queryString = `SELECT * FROM users WHERE username = '${username}'`
@@ -65,15 +64,16 @@ userController.login = async(req, res, next) => {
   
     //If no results are returned, throw incorrect entry error
     if (!foundUser.rows.length) {
-      res.locals.errorMessage = 'Your username or password was entered incorrectly. Please try again.';
-      return res.status(400).json({username: '', password: '', errorMessage: res.locals.errorMessage})
+      res.locals.message = 'Your username or password was entered incorrectly. Please try again.';
+      return res.status(400).json({message: res.locals.message})
     }
-    
-    const compare = bcrypt.compare(password, foundUser.rows[0].password)
+
+    const compare = bcrypt.compareSync(password, foundUser.rows[0].password)
     if(!compare){
-      res.locals.errorMessage = 'Your username or password was entered incorrectly. Please try again.';
-      return res.status(400).json({username: '', password: '', errorMessage: res.locals.errorMessage})
-    }
+      res.locals.message = 'Your username or password was entered incorrectly. Please try again.';
+      return res.status(400).json({message: res.locals.message})
+    } 
+
     const token = jwt.sign({user : foundUser.rows[0].username}, "mmmsecret", {expiresIn: 15000});
 
     res.cookie('token', token, {

@@ -17,13 +17,20 @@ const Login = () => {
       body: JSON.stringify(userData)
     })
     .then((response) =>{
-      if(!response.ok) console.log("An error occurred")
+      if(!response.ok){
+        const result = response.json();
+        result.then((result) => alert(result.message))
+      }
      else{
-      response.text()
-      navigate('/dashboard');
-    }
+      const result = response.json();
+      result.then((result) => {
+        console.log(result)
+        window.sessionStorage.setItem("username", result.username.toString())
+        navigate('/dashboard');
+       })
+     }
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
   }
 
 return (

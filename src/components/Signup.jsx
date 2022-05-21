@@ -17,13 +17,20 @@ const Signup = () => {
       body: JSON.stringify(newUser)
     })
     .then((response) =>{
-      if(!response.ok) console.log("An error occurred")
-     else{
-      response.text()
-      navigate('/dashboard');
-    }
+      if(!response.ok){
+        const result = response.json();
+        result.then((result) => alert(result.message))
+      }
+      else{
+        const result = response.json();
+         result.then((result) => {
+          console.log(result)
+          window.sessionStorage.setItem("username", result.username.toString())
+          navigate('/dashboard');
+         })
+       }
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
   }
 return (
   <div className='loginContainer'>
