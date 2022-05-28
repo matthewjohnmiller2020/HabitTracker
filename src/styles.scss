@@ -10,6 +10,25 @@ body {
                           1px 1px 0 #000,
                          1px -1px 0 #000,
                         -1px -1px 0 #000;
+
+                        button{
+                          display: block;
+                          margin-left: 50%;
+                          margin-right: 50%;
+                          margin-bottom: 1em;
+                          text-align: center;
+                          width: 20%;
+                          background-color: rgb(87, 161, 53);
+                          color: antiquewhite;
+                          font-style: arial;
+                          border-width: 5px;
+                          border-color: #8e6894;
+                          text-shadow: -1px 1px 0 #000,
+                                                1px 1px 0 #000,
+                                               1px -1px 0 #000,
+                                              -1px -1px 0 #000;
+                        
+                        }
   
 }
 .loginContainer {
@@ -33,24 +52,7 @@ body {
     justify-content: right;
     margin-bottom: 1.5em;
   }
-  button{
-    display: block;
-    margin-left: 40%;
-    margin-right: 40%;
-    margin-bottom: 1em;
-    text-align: center;
-    width: 20%;
-    background-color: rgb(87, 161, 53);
-    color: antiquewhite;
-    font-style: arial;
-    border-width: 5px;
-    border-color: #a48ba8;
-    text-shadow: -1px 1px 0 #000,
-                          1px 1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px -1px 0 #000;
-  
-  }
+
 }
 .habitCard {
   background-color: transparent;
@@ -58,3 +60,6 @@ body {
   color: antiquewhite;
   margin: 10px;
 }
+
+
+  

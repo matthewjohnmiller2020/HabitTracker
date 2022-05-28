@@ -24,7 +24,6 @@ const Login = () => {
      else{
       const result = response.json();
       result.then((result) => {
-        console.log(result)
         window.sessionStorage.setItem("username", result.username.toString())
         navigate('/dashboard');
        })

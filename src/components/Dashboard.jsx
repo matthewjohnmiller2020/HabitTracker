@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import Habit from './Habit.jsx';
 
 const Dashboard = () => {
@@ -6,8 +7,6 @@ const Dashboard = () => {
   useEffect(() =>
   {
     const username = window.sessionStorage.getItem("username");
-    console.log(username);
-    console.log(typeof username);
     fetch('/habits/getHabits', {
       method: "POST",
       headers: {"Content-Type": "application/json; charset=UTF-8"},
@@ -20,6 +19,7 @@ const Dashboard = () => {
         habitCards.push(
           <Habit 
             key={habit.habitid}
+            id={habit.habitid}
             habitname={habit.habitname}
             moneyspent={habit.moneyspent}
             // lasttime={habit.lasttime}
@@ -33,6 +33,9 @@ return (
   <div className='dash'>
     <h1>Your habits:</h1>
     {habits}
+    <Link to='/creator'>
+      <button>New Habit</button>
+    </Link>
   </div>
 )
 }
