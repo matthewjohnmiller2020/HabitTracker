@@ -30,9 +30,7 @@ const HabitCreator = () => {
     })
     .catch(err => console.log(err))
   }
-  const back = () => {
-    navigate('/dashboard')
-  }
+
     return (
       <div className="habitCreator">
         <h1>Create a new habit</h1>
@@ -48,7 +46,9 @@ const HabitCreator = () => {
           </div>}
           <button type='submit'>Submit</button>
         </form>
-        <button onClick={back}>Back to Dashboard</button>
+        <Link to='/dashboard'>
+        <button>Back to dashboard</button>
+      </Link>
 
       </div>
 )

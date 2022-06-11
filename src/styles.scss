@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background: url("https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center center fixed;
+  background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2)), url("https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center center fixed;
   background-size: cover;
   height: 100%;
   overflow: hidden;
@@ -11,24 +11,24 @@ body {
                          1px -1px 0 #000,
                         -1px -1px 0 #000;
 
-                        button{
-                          display: block;
-                          margin-left: 50%;
-                          margin-right: 50%;
-                          margin-bottom: 1em;
-                          text-align: center;
-                          width: 20%;
-                          background-color: rgb(87, 161, 53);
-                          color: antiquewhite;
-                          font-style: arial;
-                          border-width: 5px;
-                          border-color: #8e6894;
-                          text-shadow: -1px 1px 0 #000,
-                                                1px 1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px -1px 0 #000;
+button{
+  display: block;
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-bottom: 1em;
+  text-align: center;
+  width: 20%;
+  background-color: rgb(87, 161, 53);
+  color: antiquewhite;
+  font-style: arial;
+  border-width: 5px;
+  border-color: #8e6894;
+  text-shadow: -1px 1px 0 #000,
+  1px 1px 0 #000,
+  1px -1px 0 #000,
+  -1px -1px 0 #000;
                         
-                        }
+      }
   
 }
 .loginContainer {

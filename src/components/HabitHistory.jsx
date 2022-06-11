@@ -28,6 +28,24 @@ const back = () => {
   window.sessionStorage.removeItem("habitID");
   navigate('/dashboard');
 }
+
+const deleteHabit = () => {
+  const habitID = window.sessionStorage.getItem("habitID");
+  fetch(`/habits/deleteHabit${habitID}`, {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json; charset=UTF-8"},
+  })
+  .then((response) => {
+    if(!response.ok){
+      const result = response.json();
+      result.then((result) => alert(result.message))
+    }
+   else{
+      back();
+   }
+  })
+}
+
 return (
 <div className='habitHistory'>
   <h1>History for {habitData.name}</h1>
@@ -36,7 +54,7 @@ return (
   {/* <p>Last time streak ended: {props.lasttime}</p> */}
   <button onClick={back}>Back to Dashboard</button>
   <button>Relapse</button>
-  <button>Delete Habit</button>
+  <button onClick={deleteHabit}>Delete Habit</button>
 </div>
 );
 }

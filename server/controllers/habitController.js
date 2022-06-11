@@ -2,7 +2,7 @@ const db = require('../dataModel.js');
 const habitController = {};
 
 habitController.getHabits = async(req, res, next) => {
-  const {username} = req.body;
+  const username = req.params.username;
   //replace username with userid
 
   if(!username){
@@ -40,7 +40,7 @@ habitController.createHabit = async (req, res, next) => {
   const {username, name, money} = req.body;
 
   //Ensure that all fields are not blank
-  if(!username || !name || !money) {
+  if(!username || !name) {
     res.locals.message = 'One or more of the fields was blank. Please try again.'
     return res.status(400).json({ message: res.locals.message})
   }
@@ -63,7 +63,28 @@ try{
 
   await db.query(insert, values);
   next();
-  } catch(err) {
+}
+catch(err) {
+    console.log(err);
+    next({
+      message: err
+    })
+  }
+}
+
+habitController.deleteHabit = async(req, res, next) => {
+  const habitID = req.params.habitID;
+  console.log("params id ", habitID)
+  if(!habitID) {
+    res.locals.message = 'ID for habit not found. Please try again.'
+    return res.status(400).json({ message: res.locals.message})
+  }
+  try{
+    const sql = `DELETE FROM Habits WHERE habitid=${habitID}`;
+    const result = await db.query(sql);
+    next();
+  }
+  catch(err) {
     console.log(err);
     next({
       message: err

@@ -7,10 +7,8 @@ const Dashboard = () => {
   useEffect(() =>
   {
     const username = window.sessionStorage.getItem("username");
-    fetch('/habits/getHabits', {
-      method: "POST",
+    fetch(`/habits/getHabits${username}`, {
       headers: {"Content-Type": "application/json; charset=UTF-8"},
-      body: JSON.stringify({username: username})
     })
     .then((data) => data.json())
     .then((data) => {
