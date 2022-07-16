@@ -60,6 +60,27 @@ button{
   color: antiquewhite;
   margin: 10px;
 }
+.Month {
+  
+  background: linear-gradient(to bottom right, rgba(82, 19, 230, 0.9), rgba(255,255,255,.2)), coral;
+  border: 4px solid rgb(190, 190, 182);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.Day {
+  background-color: rgba(207, 75, 255, 0.638);
+  border: 4px solid purple;
+  border-radius: 10px;
+  color: white;
+  margin: 5px;
+  text-align: center;
+  h3{
+    text-align: left;
+    padding-left: 3%;
+  }
+}
+
 
 
   

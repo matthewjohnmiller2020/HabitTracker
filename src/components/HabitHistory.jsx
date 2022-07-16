@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import Month from './Month.jsx';
 
 const HabitHistory = () => {
   const navigate = useNavigate();
@@ -45,11 +46,12 @@ const deleteHabit = () => {
    }
   })
 }
-
+//eventually will be calendar object not month object
+//key for month will have to be actual month variable eventually
 return (
 <div className='habitHistory'>
   <h1>History for {habitData.name}</h1>
-  <div className='calendar'>Calendar div</div>
+  <Month key={'month'}/>
 {habitData.money !== null ? <h2>Total Money spent: {habitData.money}</h2> : null}
   {/* <p>Last time streak ended: {props.lasttime}</p> */}
   <button onClick={back}>Back to Dashboard</button>
