@@ -55,7 +55,6 @@ return (
 {habitData.money !== null ? <h2>Total Money spent: {habitData.money}</h2> : null}
   {/* <p>Last time streak ended: {props.lasttime}</p> */}
   <button onClick={back}>Back to Dashboard</button>
-  <button>Relapse</button>
   <button onClick={deleteHabit}>Delete Habit</button>
 </div>
 );

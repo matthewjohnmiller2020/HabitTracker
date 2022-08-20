@@ -21,7 +21,7 @@ const Month = () => {
       dates.push(<Day key={`lastMonth${lastMonth - i}`} dayNum={lastMonth - i} isThisMonth={false}/>)//Add last days of previous month to balance calendar so that it always begins on a sunday
 
     for(let i = 1; i <= lastDay; i++)
-      dates.push(<Day key={`currentMonth${i}`} dayNum={i} isThisMonth={true}/>)
+      dates.push(<Day key={`currentMonth${i}`} dayNum={i} isThisMonth={true} monthNum={now.getMonth()+1}/>)
       //Add days of month
     let newDate = 1;
     while(dates.length % 7 !== 0){

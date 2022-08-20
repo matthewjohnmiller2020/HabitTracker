@@ -8,12 +8,11 @@ const Day = (props) => {
   <div className='Day'>
     <h3>{props.dayNum}</h3>
     {isTemplate &&<h2>{props.dayName}</h2>}
-    {isThisMonth == true ? <div id={props.dayName}>
-  <DayModal key={`${props.dayNum}modal`}/>
-</div> : null}
+    {isThisMonth == true ? 
+    <div id={props.dayName}>
+      <DayModal key={`${props.dayNum}modal`} dayNum={props.dayNum} monthNum={props.monthNum}/>
+    </div> : null}
   </div>
-
-
   );
 }
 
